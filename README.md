@@ -1,6 +1,6 @@
 # React Advent Calendar App 
 
-## Opning and closing hatches
+## Opening and closing the hatches
 
 ![image](https://user-images.githubusercontent.com/33283405/103387735-a92ab480-4b05-11eb-910f-477efe0941eb.png)
 
