@@ -1,5 +1,16 @@
 # React Advent Calendar App 
 
+Making a Advent Calendar with react.
+
+# Learning
+
+* UseStates
+* UseEffect
+* Style components
+* Functional component
+* Spread operator
+* Localstorage
+
 ## Opening and closing the hatches
 
 ![image](https://user-images.githubusercontent.com/33283405/103387735-a92ab480-4b05-11eb-910f-477efe0941eb.png)
