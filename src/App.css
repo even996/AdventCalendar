@@ -1,0 +1,26 @@
+
+
+h1 {
+  font-size: 10rem;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  font-family: "Dancing Script", cursive;
+  width: 100%;
+  -webkit-text-stroke:0.3vw black;
+  text-transform: uppercase;
+  background: radial-gradient(circle, #dbc64f 0%, #ba0606 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+
+
+
+body{
+  background-image: url('./img/calendar_background6.jpg');
+  width: auto;
+  height: auto;
+  margin:0;
+}
