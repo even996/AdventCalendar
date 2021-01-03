@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import hatchBackdrop from "./img/hatch_back.jpg";
+import styled from 'styled-components';
+import hatchBackdrop from './img/hatch_back.jpg';
 
 export const StyledHatch = styled.div`
-  padding-top: 100%; /* padding-top is based on the width - believe it or not!!! */
+  padding-top: 100%;
   position: relative;
   cursor: pointer;
   .front {
-    background: center / cover url(${props => props.background});
+    background: center / cover url(${(props) => props.background});
     position: absolute;
     top: 0;
     left: 0;
@@ -15,7 +15,7 @@ export const StyledHatch = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Dancing Script", cursive;
+      font-family: 'Dancing Script', cursive;
       color: #fff;
       padding: 20px;
       width: 50%;
@@ -37,7 +37,7 @@ export const StyledHatch = styled.div`
     z-index: 1;
     transform: rotateY(180deg);
     p {
-      font-family: "Dancing Script", cursive;
+      font-family: 'Dancing Script', cursive;
       color: #fff;
       padding: 10px;
       font-size: 1.4rem;

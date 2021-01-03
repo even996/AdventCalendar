@@ -13,12 +13,13 @@ import './App.css';
 
 function App() {
   // UseStates for å endre variabler i browseren.
+  // må bruke setHatches for å oppdatere arrayet når noe slettes eller bytter side.
   const [hatches, setHatches] = useState([]);
   const [christmas, setChristmas] = useState('');
   const [clikedHatch, setClickedHatch] = useState(true);
 
   // sjekk om den finnes en kalender inne på localStorage hvis ikke lages det en kalender
-  // skjer kun i starten når den laster inn
+  // skjer kun når den refreser -->  []
   useEffect(() => {
     const calendar = localStorage.calendar
       ? JSON.parse(localStorage.calendar)
@@ -27,22 +28,18 @@ function App() {
   }, []);
 
   //Legger endringer i lukene i localStorage
+  // skjer hver gang lukene oppdateres --> [hatches]
   useEffect(() => {
     hatches.length && localStorage.setItem('calendar', JSON.stringify(hatches));
   }, [hatches]);
 
-  // Sjekker om alle lukene er åpnet da skal scenen byttes.
-  // Ønsket å ta funksjonen ut med fikk en error på det. At den ikke var i bruk når den var utenfor
-  //Ønsket å bruke clear på hatchene men det funka ikke så måtte slette de en etter en.
-
   // Denne håndtere flip funksjonen
-  // finner hatchen som iden tilhører ...(spread operator) for å hente variablene og kun endre open.
-  //!hatch.open(denne vil gjøre det omendt) returner (: hatchen)
-
   const handleFlipHatch = (id) => {
+    // if setningen gjør at man kan snu et element om gangen. Blir endret til false når den kjører og endret til true
+    // når remove methoden er ferdig.
     if (clikedHatch) {
       setClickedHatch(false);
-
+      // finner hatchen som iden tilhører ...(spread operator) for å hente variablene og å kun endre open til true.
       const updatedHatches = hatches.map((hatch) =>
         hatch.id === id ? { ...hatch, open: true } : hatch
       );
@@ -54,7 +51,7 @@ function App() {
     }
   };
 
-  // soundPLay brukes når man trykker på en av lukkene eller når alle er åpne da sendes en lydfil til denne funksjonen
+  // soundPlay brukes når man trykker på en av lukkene eller når alle er åpne da sendes en lydfil til denne funksjonen
   // som spilles av.
 
   const soundPlay = (src) => {
@@ -66,15 +63,18 @@ function App() {
   };
 
   const remover = (id) => {
+    // filtrer vekk denne ene med iden
     const newList = hatches.filter((hatch) => hatch.id !== id);
+    // Timeout funksjon på 4 sec slik at man kan lese kortet før det slettes.
     setTimeout(() => {
       setHatches(newList);
       if (hatches === undefined || hatches.length === 1) {
-        // array empty or does not exist
+        // hvis alle er borte skal Merry Christmas kjøre.
         setChristmas('Merry Christmas!!!');
         soundPlay(
           'https://freesound.org/data/previews/322/322275_5260872-lq.mp3'
         );
+        // Localstorage blir da fjernet slik at vi kan kjøre appen på nytt.
         localStorage.clear();
       }
       setClickedHatch(true);
