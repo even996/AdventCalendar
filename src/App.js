@@ -23,6 +23,7 @@ function App() {
     const calendar = localStorage.calendar
       ? JSON.parse(localStorage.calendar)
       : createCalendar();
+    // Skal snu alle som er åpen hvis browseren refreses
     const updatedHatches = calendar.map((hatch) =>
       hatch.open === true ? { ...hatch, open: false } : hatch
     );
@@ -34,15 +35,12 @@ function App() {
     hatches.length && localStorage.setItem('calendar', JSON.stringify(hatches));
   }, [hatches]);
 
-  // Sjekker om alle lukene er åpnet da skal scenen byttes.
-  // Ønsket å ta funksjonen ut med fikk en error på det. At den ikke var i bruk når den var utenfor
-  //Ønsket å bruke clear på hatchene men det funka ikke så måtte slette de en etter en.
-
   // Denne håndtere flip funksjonen
   // finner hatchen som iden tilhører ...(spread operator) for å hente variablene og kun endre open.
   //!hatch.open(denne vil gjøre det omendt) returner (: hatchen)
 
   const handleFlipHatch = (id) => {
+    // boolean for å forhindre at man kan åpne flere på en gang
     if (clikedHatch) {
       setClickedHatch(false);
 
@@ -69,6 +67,7 @@ function App() {
   };
 
   const remover = (id) => {
+    // filtrer vekk den med iden fra array og setter det på nytt etter 4 sekunder
     const newList = hatches.filter((hatch) => hatch.id !== id);
     setTimeout(() => {
       setHatches(newList);
